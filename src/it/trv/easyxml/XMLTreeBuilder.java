@@ -11,9 +11,16 @@ import java.io.*;
 import java.text.ParseException;
 
 /*
-Class that provides functions to parse XML text into an XMLElement.
+Class that provides functions to parse XML code into an XMLElement.
  */
 public class XMLTreeBuilder {
+
+    /*
+    Parses into an XMLElement the XML code contained in a string.
+    Parameters: string contains the XML code
+    Returns: the parsed XMLElement containing the whole XML tree
+    Throws: ParseException if there's an error in the XML code
+     */
     public static XMLElement buildFromString(String string) throws ParseException {
         try{
             return buildFromStream(new ByteArrayInputStream(string.getBytes()));
@@ -22,11 +29,26 @@ public class XMLTreeBuilder {
         }
     }
 
+    /*
+    Parses into an XMLElement the XML code contained in a file.
+    Parameters: path contains the path of the file
+    Returns: the parsed XMLElement containing the whole XML tree
+    Throws: ParseException if there's an error in the XML code
+            FileNotFoundException if the file in the specified path does not exist
+     */
     public static XMLElement buildFromFile(String path) throws FileNotFoundException, ParseException {
         File file = new File(path);
         return buildFromFile(file);
     }
 
+
+    /*
+    Parses into an XMLElement the XML code contained in a file.
+    Parameters: file is the file
+    Returns: the parsed XMLElement containing the whole XML tree
+    Throws: ParseException if there's an error in the XML code
+            FileNotFoundException if the file does not exist
+     */
     public static XMLElement buildFromFile(File file) throws FileNotFoundException, ParseException {
         try{
             return buildFromStream(new FileInputStream(file));
@@ -37,6 +59,15 @@ public class XMLTreeBuilder {
         }
     }
 
+
+
+    /*
+    Parses into an XMLElement the XML code read from an InputStream.
+    Parameters: stream is the InputStream
+    Returns: the parsed XMLElement containing the whole XML tree
+    Throws: ParseException if there's an error in the XML code
+            IOException if there's an error while reading from the InputStream
+     */
     public static XMLElement buildFromStream(InputStream stream) throws ParseException, IOException {
         Document document;
         try{
@@ -54,6 +85,9 @@ public class XMLTreeBuilder {
         return buildFromElement(root);
     }
 
+    /*
+    Takes an Element and creates its corresponding XMLElement.
+     */
     private static XMLElement buildFromElement(Element element){
         XMLElement result = new XMLElement(element.getTagName());
         NamedNodeMap attributesMap = element.getAttributes();
