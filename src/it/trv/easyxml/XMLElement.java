@@ -147,7 +147,7 @@ public class XMLElement {
             s.append("\n");
             s.append(addTab(child.toString(),tabulationCharacters));
         }
-        s.append("\n<\\").append(this.tagName).append(">");
+        s.append("\n</").append(this.tagName).append(">");
         return s.toString();
     }
 
