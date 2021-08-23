@@ -51,7 +51,7 @@ public class XMLElement {
     Parameters: content is the new text that must be appended
      */
     public void appendTextContent(String content) {
-        this.textContent = content;
+        this.textContent = this.textContent + content;
     }
 
     /*
