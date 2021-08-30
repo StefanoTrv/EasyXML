@@ -1,7 +1,6 @@
 package it.trv.easyxml;
 
 import org.w3c.dom.*;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;

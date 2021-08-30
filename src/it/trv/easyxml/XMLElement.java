@@ -5,7 +5,7 @@ import java.util.*;
 /*
 Class that represents an XML element with its text content, attributes and children. The tag name is immutable, all the other features can be modified.
  */
-public class XMLElement {
+public class XMLElement implements Cloneable{
     private final String tagName;
     private String textContent;
     private HashMap<String, String> attributesMap;
@@ -79,12 +79,37 @@ public class XMLElement {
     }
 
     /*
+    Returns true if this instance of XMLElement has a specific attribute.
+    Parameters: name is the name of the attribute
+    Returns: true if this instance of XMLElement has the attribute named name, false otherwise
+     */
+    public boolean hasAttribute(String name){
+        return attributesMap.get(name)!=null;
+    }
+
+    /*
     Removes a specific attribute from this XMLElement and return the value of that attribute. If that attribute does not exist, it return null.
     Parameters: name is the name of the attribute that must be removed
     Returns: the value of the attributes that is removed, null if the attribute was not present
      */
     public String removeAttributeByName(String name){
         return attributesMap.remove(name);
+    }
+
+    /*
+    Returns a HashMap that contains all the attributes of this instance of XMLElement.
+    Returns: a HashMap<String, String> containing all the attributes of this XMLElement
+     */
+    public HashMap<String, String> getAllAttributes(){
+        return (HashMap<String, String>) attributesMap.clone();
+    }
+
+    /*
+    Returns a fail-fast Iterator that iterates over all the attributes of this instance of XMLElement.
+    Returns: an Iterator<Map.Entry<String, String>> that iterates over all the attributes of this XMLElement
+     */
+    public Iterator<Map.Entry<String, String>> getAttributesIterator(){
+        return attributesMap.entrySet().iterator();
     }
 
     /*
@@ -99,7 +124,7 @@ public class XMLElement {
     }
 
     /*
-    Returns: true if this is an ancestor of element, false otherwise
+    Returns: true if this XMLElement is an ancestor of the XMLElement element, false otherwise
      */
     private boolean isAncestorOf(XMLElement element){
         for (XMLElement child : children){
@@ -119,6 +144,22 @@ public class XMLElement {
      */
     public void removeChild(XMLElement child) throws NoSuchElementException{
         if(!children.remove(child)) throw new NoSuchElementException("Can't remove "+child.getTagName()+" from the children of "+this.getTagName()+" because "+child.getTagName()+" is not a child of "+this.getTagName()+".");
+    }
+
+    /*
+    Returns an ArrayList that contains all the children of this instance of XMLElement.
+    Returns: an ArrayList<XMLElement> containing all the children of this XMLElement
+     */
+    public ArrayList<XMLElement> getAllChildren(){
+        return (ArrayList<XMLElement>) children.clone();
+    }
+
+    /*
+    Returns a fail-fast Iterator that iterates over all the children of this instance of XMLElement.
+    Returns: an Iterator<XMLElement> that iterates over all the children of this XMLElement
+     */
+    public Iterator<XMLElement> getChildrenIterator(){
+        return children.iterator();
     }
 
     /*
@@ -166,5 +207,19 @@ public class XMLElement {
             }
         }
         return result.toString();
+    }
+
+    /*
+    Returns a deep copy of this XMLElement instance.
+     */
+    public Object clone(){
+        XMLElement copy = new XMLElement(this.tagName);
+        copy.textContent=this.textContent;
+        copy.attributesMap= (HashMap<String, String>) this.attributesMap.clone();
+        Iterator i = this.children.iterator();
+        while(i.hasNext()){
+            copy.addChild((XMLElement) ((XMLElement) i.next()).clone());
+        }
+        return copy;
     }
 }
