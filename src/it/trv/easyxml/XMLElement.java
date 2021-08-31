@@ -81,16 +81,16 @@ public class XMLElement implements Cloneable{
     /*
     Returns true if this instance of XMLElement has a specific attribute.
     Parameters: name is the name of the attribute
-    Returns: true if this instance of XMLElement has the attribute named name, false otherwise
+    Returns: true if this instance of XMLElement has an attribute named name, false otherwise
      */
     public boolean hasAttribute(String name){
         return attributesMap.get(name)!=null;
     }
 
     /*
-    Removes a specific attribute from this XMLElement and return the value of that attribute. If that attribute does not exist, it return null.
+    Removes a specific attribute from this XMLElement and returns the value of that attribute. If that attribute does not exist, it returns null.
     Parameters: name is the name of the attribute that must be removed
-    Returns: the value of the attributes that is removed, null if the attribute was not present
+    Returns: the value of the attribute that is removed, null if the attribute was not present
      */
     public String removeAttributeByName(String name){
         return attributesMap.remove(name);
@@ -114,8 +114,8 @@ public class XMLElement implements Cloneable{
 
     /*
     Adds an XMLElement to the children of this XMLElement.
-    Parameters: child is the child that must be added
-    Throws: IllegalArgumentException if the new child is an ancestor of this XMLElement or if this and child are the same object
+    Parameters: child is the XMLElement that must be added to the children of this XMLElement
+    Throws: IllegalArgumentException if child is an ancestor of this XMLElement or if this and child are the same object
      */
     public void addChild(XMLElement child) throws IllegalArgumentException{
         if (this==child) throw new IllegalArgumentException("You can't add an XMLElement to its own children.");
@@ -139,7 +139,7 @@ public class XMLElement implements Cloneable{
 
     /*
     Removes an XMLElement from the children of this XMLElement. Only the direct children are removed, not the other descendants.
-    Parametri: child is the children that must be removed
+    Parameters: child is the children that must be removed
     Throws: NoSuchElementException if the specified element is not a child of this XMLElement.
      */
     public void removeChild(XMLElement child) throws NoSuchElementException{
@@ -163,7 +163,7 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Returns the text corresponding to this XMLElement.
+    Returns the XML code corresponding to this XMLElement.
     Returns: the string representation of this XMLElement.
      */
     public String toString(){
