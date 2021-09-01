@@ -1,5 +1,7 @@
 package it.trv.easyxml;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.*;
 
 /*
@@ -147,6 +149,14 @@ public class XMLElement implements Cloneable{
     }
 
     /*
+    Returns the ith child of this XMLElement.
+    Parameters: i is the index of the child in the children of this XMLElement.
+     */
+    public XMLElement getChildAt(int i){
+        return children.get(i);
+    }
+
+    /*
     Returns an ArrayList that contains all the children of this instance of XMLElement.
     Returns: an ArrayList<XMLElement> containing all the children of this XMLElement
      */
@@ -163,9 +173,31 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Returns the XML code corresponding to this XMLElement.
-    Returns: the string representation of this XMLElement.
-     */
+    Returns all the descendants of this XMLElement that have a specific tag name.
+    Parameters: tagName is tag name of the descendants that must be returned
+    Returns: an ArrayList<XMLElement> containing all the descendants of this XMLElement whose tag name is tagName.
+    */
+    public ArrayList<XMLElement> getDescendantsWithTag(String tagName) {
+        ArrayList<XMLElement> result = new ArrayList<>();
+        Queue<XMLElement> queue = new ArrayDeque<>();
+        queue.add(this);
+        XMLElement element;
+        while(queue.peek()!=null){
+            element = queue.poll();
+            if(element.tagName.equals(tagName)){
+                result.add(element);
+            }
+            for(XMLElement child: element.children){
+                queue.add(child);
+            }
+        }
+        return result;
+    }
+
+    /*
+        Returns the XML code corresponding to this XMLElement.
+        Returns: the string representation of this XMLElement.
+         */
     public String toString(){
         return this.toString("\t");
     }
@@ -182,11 +214,11 @@ public class XMLElement implements Cloneable{
         }
         s.append(">");
         if(!textContent.equals("")){
-            s.append("\n").append(tabulationCharacters).append(this.textContent);
+            s.append("\n").append(addTab(this.textContent,tabulationCharacters));
         }
         for(XMLElement child : children){
             s.append("\n");
-            s.append(addTab(child.toString(),tabulationCharacters));
+            s.append(addTab(child.toString(tabulationCharacters),tabulationCharacters));
         }
         s.append("\n</").append(this.tagName).append(">");
         return s.toString();

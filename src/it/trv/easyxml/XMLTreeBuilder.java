@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 /*
 Class that provides functions to parse XML code into an XMLElement.
@@ -98,11 +99,20 @@ public class XMLTreeBuilder {
         }
         //adds the children and reads the text content
         Node childNode = element.getFirstChild();
+        String[] temp;
+        StringBuilder content;
         while( childNode!=null ){
             if (childNode.getNodeType() == Node.ELEMENT_NODE) {
                 result.addChild(buildFromElement((Element) childNode));
             }else if(childNode.getNodeType() == Node.TEXT_NODE && childNode.getTextContent().trim().length()>0){
-                result.appendTextContent(childNode.getTextContent());
+                temp = childNode.getTextContent().trim().split("\n");
+                content = new StringBuilder();
+                for(int i=0;i<temp.length;i++){
+                    content.append(temp[i].trim()).append("\n");
+                }
+                if(content.length()>0){
+                    result.appendTextContent(content.toString().substring(0,content.length()-1));
+                }
             }
             childNode = childNode.getNextSibling();
         }
