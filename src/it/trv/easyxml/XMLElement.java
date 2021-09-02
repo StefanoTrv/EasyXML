@@ -126,6 +126,19 @@ public class XMLElement implements Cloneable{
     }
 
     /*
+    Adds an XMLElement to the children of this XMLElement at the specific position in the list of children.
+    Shifts the child currently at that position (if any) and any subsequent children to the right (adds one to their indices).
+    Parameters: i is the index at which the new child will be located
+                child is the XMLElement that must be added to the children of this XMLElement
+    Throws: IllegalArgumentException if child is an ancestor of this XMLElement or if this and child are the same object
+     */
+    public void addChild(int i, XMLElement child) throws IllegalArgumentException{
+        if (this==child) throw new IllegalArgumentException("You can't add an XMLElement to its own children.");
+        if (child.isAncestorOf(this)) throw new IllegalArgumentException(child.getTagName()+" is an ancestor of "+this.getTagName()+", so it can't become its child.");
+        children.add(child);
+    }
+
+    /*
     Returns: true if this XMLElement is an ancestor of the XMLElement element, false otherwise
      */
     private boolean isAncestorOf(XMLElement element){
@@ -149,11 +162,42 @@ public class XMLElement implements Cloneable{
     }
 
     /*
+    Removes the child at the specified position in the list of children of this XMLElement.
+    Parameters: i is the index of the child that must be removed in the list of children of this XMLElement
+     */
+    public void removeChild(int i){
+        children.remove(i);
+    }
+
+    /*
     Returns the ith child of this XMLElement.
     Parameters: i is the index of the child in the children of this XMLElement.
      */
     public XMLElement getChildAt(int i){
         return children.get(i);
+    }
+
+    /*
+    Returns the index of the specified XMLElement in the list of children of this XMLElement.
+    Parameters: child is the child whose index must be returned
+    Returns: the index of child in the list of children of this XMLElement
+    Throws: NoSuchElementException if the specified element is not a child of this XMLElement.
+     */
+    public int indexOfChild(XMLElement child) throws NoSuchElementException{
+        int index = children.indexOf(child);
+        if(index==-1){
+            throw new NoSuchElementException(child.tagName+" is not a child of "+this.tagName);
+        }else {
+            return index;
+        }
+    }
+
+    /*
+    Returns the number of direct children of this instance of XMLElement.
+    Returns: the number of children of this instance of XMLElement
+     */
+    public int getNumberOfChildren(){
+        return children.size();
     }
 
     /*
@@ -171,6 +215,49 @@ public class XMLElement implements Cloneable{
     public Iterator<XMLElement> getChildrenIterator(){
         return children.iterator();
     }
+
+    /*
+    Swaps two children in the children list of this instance of XMLElement, so to change their order.
+    Parameters: i and j are the indices of the two children that must be swapped
+     */
+    public void swapChildrenPosition(int i, int j){
+        XMLElement temp = children.get(i);
+        children.set(i,children.get(j));
+        children.set(j,temp);
+    }
+
+    /*
+    Moves a child in the children list of this instance of XMLElement "up" (that is, towards the beginning of the list) by a certain amount of positions.
+    Parameters: i is the index of the child that must be moved
+                n is the number of positions that the child at i must be moved up
+     */
+    public void moveChildPositionUp(int i, int n){
+        if(n<0){
+            moveChildPositionDown(i,-n);
+        }
+        while(n>0&&i>0){
+            swapChildrenPosition(i,i-1);
+            n--;
+            i--;
+        }
+    }
+
+    /*
+    Moves a child in the children list of this instance of XMLElement "down" (that is, towards the end of the list) by a certain amount of positions.
+    Parameters: i is the index of the child that must be moved
+                n is the number of positions that the child at i must be moved down
+     */
+    public void moveChildPositionDown(int i, int n){
+        if(n<0){
+            moveChildPositionUp(i,-n);
+        }
+        while(n>0&&i<children.size()-1){
+            swapChildrenPosition(i,i+1);
+            n--;
+            i++;
+        }
+    }
+
 
     /*
     Returns all the descendants of this XMLElement that have a specific tag name.
