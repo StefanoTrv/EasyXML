@@ -179,16 +179,16 @@ public class XMLElement implements Cloneable{
     */
     public ArrayList<XMLElement> getDescendantsWithTag(String tagName) {
         ArrayList<XMLElement> result = new ArrayList<>();
-        Queue<XMLElement> queue = new ArrayDeque<>();
-        queue.add(this);
+        Stack<XMLElement> stack = new Stack<>();
+        stack.push(this);
         XMLElement element;
-        while(queue.peek()!=null){
-            element = queue.poll();
+        while(!stack.empty()){
+            element = stack.pop();
             if(element.tagName.equals(tagName)){
                 result.add(element);
             }
-            for(XMLElement child: element.children){
-                queue.add(child);
+            for(int i=element.children.size()-1;i>=0;i--){
+                stack.push(element.children.get(i));
             }
         }
         return result;
