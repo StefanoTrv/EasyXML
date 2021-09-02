@@ -1,7 +1,5 @@
 package it.trv.easyxml;
 
-import java.io.FileNotFoundException;
-import java.text.ParseException;
 import java.util.*;
 
 /*
@@ -135,7 +133,7 @@ public class XMLElement implements Cloneable{
     public void addChild(int i, XMLElement child) throws IllegalArgumentException{
         if (this==child) throw new IllegalArgumentException("You can't add an XMLElement to its own children.");
         if (child.isAncestorOf(this)) throw new IllegalArgumentException(child.getTagName()+" is an ancestor of "+this.getTagName()+", so it can't become its child.");
-        children.add(child);
+        children.add(i,child);
     }
 
     /*
@@ -162,8 +160,8 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Removes the child at the specified position in the list of children of this XMLElement.
-    Parameters: i is the index of the child that must be removed in the list of children of this XMLElement
+    Removes the child at the specified position from the list of children of this XMLElement.
+    Parameters: i is the index of the child that must be removed from the list of children of this XMLElement
      */
     public void removeChild(int i){
         children.remove(i);
@@ -178,9 +176,9 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Returns the index of the specified XMLElement in the list of children of this XMLElement.
+    Returns the index of the first occurrence of the specified XMLElement in the list of children of this XMLElement.
     Parameters: child is the child whose index must be returned
-    Returns: the index of child in the list of children of this XMLElement
+    Returns: the index of the first occurrence of child in the list of children of this XMLElement
     Throws: NoSuchElementException if the specified element is not a child of this XMLElement.
      */
     public int indexOfChild(XMLElement child) throws NoSuchElementException{
@@ -217,7 +215,7 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Swaps two children in the children list of this instance of XMLElement, so to change their order.
+    Swaps the positions of two children in the children list of this instance of XMLElement.
     Parameters: i and j are the indices of the two children that must be swapped
      */
     public void swapChildrenPosition(int i, int j){
@@ -227,7 +225,7 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Moves a child in the children list of this instance of XMLElement "up" (that is, towards the beginning of the list) by a certain amount of positions.
+    Moves a child in the children list of this instance of XMLElement "up" (that is, towards the beginning of the list) by a certain number of positions.
     Parameters: i is the index of the child that must be moved
                 n is the number of positions that the child at i must be moved up
      */
@@ -243,7 +241,7 @@ public class XMLElement implements Cloneable{
     }
 
     /*
-    Moves a child in the children list of this instance of XMLElement "down" (that is, towards the end of the list) by a certain amount of positions.
+    Moves a child in the children list of this instance of XMLElement "down" (that is, towards the end of the list) by a certain number of positions.
     Parameters: i is the index of the child that must be moved
                 n is the number of positions that the child at i must be moved down
      */

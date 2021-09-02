@@ -8,7 +8,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 /*
 Class that provides functions to parse XML code into an XMLElement.
