@@ -18,9 +18,18 @@ A Java library to easily parse, unparse and manipulate XML.
     * [HashMap&lt;String, String&gt; getAllAttributes()](#hashmapstring-string-getallattributes)
     * [Iterator&lt;Map.Entry&lt;String, String&gt;&gt; getAttributesIterator()](#iteratormapentrystring-string-getattributesiterator)
     * [void addChild(XMLElement child)](#void-addchildxmlelement-child)
+    * [void addChild(int i, XMLElement child)](#void-addchildint-i-xmlelement-child)
     * [void removeChild(XMLElement child)](#void-removechildxmlelement-child)
+    * [void removeChild(int i)](#void-removechildint-i)
+    * [XMLElement getChildAt(int i)](#xmlelement-getchildatint-i)
+    * [int indexOfChild(XMLElement child)](#int-indexofchildxmlelement-child)
+    * [int getNumberOfChildren()](#int-getnumberofchildren)
     * [ArrayList&lt;XMLElement&gt; getAllChildren()](#arraylistxmlelement-getallchildren)
     * [Iterator&lt;XMLElement&gt; getChildrenIterator()](#iteratorxmlelement-getchildreniterator)
+    * [void swapChildrenPosition(int i, int j)](#void-swapchildrenpositionint-i-int-j)
+    * [void moveChildPositionUp(int i, int n)](#void-movechildpositionupint-i-int-n)
+    * [void moveChildPositionDown(int i, int n)](#void-movechildpositiondownint-i-int-n)
+    * [ArrayList&lt;XMLElement&gt; getDescendantsWithTag(String tagName)](#arraylistxmlelement-getdescendantswithtagstring-tagname)
     * [String toString()](#string-tostring)
     * [String toString(String tabulationCharacters)](#string-tostringstring-tabulationcharacters)
     * [Object clone()](#object-clone)
@@ -121,12 +130,45 @@ Parameters:
 Throws:  
 &ensp;&ensp;`IllegalArgumentException` if `child` is an ancestor of this XMLElement or if `this` and `child` are the same object
 
+### void addChild(int i, XMLElement child)
+Adds an XMLElement to the children of this XMLElement at the specific position in the list of children.  
+Shifts the child currently at that position (if any) and any subsequent children to the right (adds one to their indices).  
+Parameters:  
+&ensp;&ensp;`i` is the index at which the new child will be located  
+&ensp;&ensp;`child` is the XMLElement that must be added to the children of this XMLElement  
+Throws:  
+&ensp;&ensp;`IllegalArgumentException` if child is an ancestor of this XMLElement or if this and child are the same object
+
 ### void removeChild(XMLElement child)
 Removes an XMLElement from the children of this XMLElement. Only the direct children are removed, not the other descendants.  
 Parameters:  
 &ensp;&ensp;`child` is the children that must be removed  
 Throws:  
 &ensp;&ensp;`NoSuchElementException` if `child` is not a child of this XMLElement.
+
+### void removeChild(int i)
+Removes the child at the specified position from the list of children of this XMLElement.  
+Parameters:  
+&ensp;&ensp;`i` is the index of the child that must be removed from the list of children of this XMLElement
+
+### XMLElement getChildAt(int i)
+Returns the child located at the specified position in the list of the children of this XMLElement.  
+Parameters:  
+&ensp;&ensp;`i` is the index of the child in the list of the children of this XMLElement.
+
+### int indexOfChild(XMLElement child)
+Returns the index of the first occurrence of the specified XMLElement in the list of children of this XMLElement.  
+Parameters:  
+&ensp;&ensp;`child` is the child whose index must be returned  
+Returns:  
+&ensp;&ensp;the index of the first occurrence of `child` in the list of children of this XMLElement  
+Throws:  
+&ensp;&ensp;`NoSuchElementException` if the specified element is not a child of this XMLElement.
+
+### int getNumberOfChildren()
+Returns the number of direct children of this instance of XMLElement.  
+Returns:  
+&ensp;&ensp;the number of children of this instance of XMLElement
 
 ### ArrayList&lt;XMLElement&gt; getAllChildren()
 Returns an ArrayList that contains all the children of this instance of XMLElement.  
@@ -138,10 +180,34 @@ Returns a fail-fast Iterator that iterates over all the children of this instanc
 Returns:  
 &ensp;&ensp;an Iterator&lt;XMLElement&gt; that iterates over all the children of this XMLElement
 
+### void swapChildrenPosition(int i, int j)
+Swaps the positions of two children in the children list of this instance of XMLElement.  
+Parameters:  
+&ensp;&ensp;`i` and `j` are the indices of the two children that must be swapped
+
+### void moveChildPositionUp(int i, int n)
+Moves a child in the children list of this instance of XMLElement "up" (that is, towards the beginning of the list) by a certain number of positions.  
+Parameters:  
+&ensp;&ensp;`i` is the index of the child that must be moved  
+&ensp;&ensp;`n` is the number of positions that the child at i must be moved up
+
+### void moveChildPositionDown(int i, int n)
+Moves a child in the children list of this instance of XMLElement "down" (that is, towards the end of the list) by a certain number of positions.  
+Parameters:  
+&ensp;&ensp;`i` is the index of the child that must be moved  
+&ensp;&ensp;`n` is the number of positions that the child at i must be moved down
+
 ### String toString()
 Returns the XML code corresponding to this XMLElement.  
 Returns:  
 &ensp;&ensp;the string representation of this XMLElement.
+
+### ArrayList&lt;XMLElement&gt; getDescendantsWithTag(String tagName)
+Returns all the descendants of this XMLElement that have a specific tag name.  
+Parameters:  
+&ensp;&ensp;`tagName` is tag name of the descendants that must be returned  
+Returns:  
+&ensp;&ensp;an ArrayList&lt;XMLElement&gt; containing all the descendants of this XMLElement whose tag name is `tagName`.
 
 ### String toString(String tabulationCharacters)
 Returns the text corresponding to this XMLElement, with the possibility of choosing the tabulation.  
