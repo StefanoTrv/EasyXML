@@ -262,7 +262,7 @@ Throws:
 &ensp;&ensp;`IOException` if there's an error while reading from the InputStream
 
 # Example
-In this example we suppose we have an xml file, "example.xml", that represents an email. This is its content:
+In this example we suppose we have an XML file, "example.xml", that represents an email. This is its content:
 ```XML
 <email>
 	<to>
@@ -315,7 +315,7 @@ public class EasyXMLExample{
         /*
         Now we want to print all the names and relative addresses that appear in the file.
         We use the function "getDescendantsWithTag" to extract from the file all the names and all the addresses.
-        Since the results of "getDescendantsWithTag" mantain the order that they have in the original XML code,
+        Since the results of "getDescendantsWithTag" maintain the order that they have in the original XML code,
         we can easily associate the names with their addresses.
         */
         ArrayList<XMLElement> names = root.getDescendantsWithTag("name");
@@ -336,7 +336,7 @@ public class EasyXMLExample{
 
         /*
         Let's pretend that Tom Bombadil's email address is wrong: how do we change it?
-        This time we will access the address element using "getDescendantsWithTag" instead pf its position.
+        This time we access the address element using "getDescendantsWithTag" instead of its position.
         We know that it's the second address in the document, and we exploit this fact.
         */
         ArrayList<XMLElement> addresses2 = root.getDescendantsWithTag("address");
