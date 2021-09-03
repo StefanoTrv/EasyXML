@@ -42,7 +42,7 @@ A Java library to easily parse, unparse and manipulate XML.
 * [Conclusion](#conclusion)
 
 # Release notes
-`none yet`
+* **1.0.0**: Initial release
 
 # Introduction
 The scope of this library is to provide an instrument to easily parse, unparse and manipulate XML code. Unlike other Java libraries that focus mostly on high speed parsing, this library focuses on ease of use and maximum flexibility. This library is thus ideal for projects that don't need extremely high performance XML parsing, but instead need a simple and ready-to-use parser of XML and/or the ability to freely inspect and manipulate XML items.
