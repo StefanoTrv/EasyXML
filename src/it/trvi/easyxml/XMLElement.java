@@ -1,4 +1,4 @@
-package it.trv.easyxml;
+package it.trvi.easyxml;
 
 import java.util.*;
 
