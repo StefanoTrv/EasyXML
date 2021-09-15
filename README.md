@@ -155,7 +155,9 @@ Parameters:
 ### XMLElement getChildAt(int i)
 Returns the child located at the specified position in the list of the children of this XMLElement.  
 Parameters:  
-&ensp;&ensp;`i` is the index of the child in the list of the children of this XMLElement.
+&ensp;&ensp;`i` is the index of the child in the list of the children of this XMLElement.  
+Returns:  
+&ensp;&ensp;the ith child of this XMLElement
 
 ### int indexOfChild(XMLElement child)
 Returns the index of the first occurrence of the specified XMLElement in the list of children of this XMLElement.  

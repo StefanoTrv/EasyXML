@@ -9,16 +9,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.text.ParseException;
 
-/*
-Class that provides functions to parse XML code into an XMLElement.
+/**
+ * Class that provides functions to parse XML code into an XMLElement.
  */
 public class XMLTreeBuilder {
 
-    /*
-    Parses into an XMLElement the XML code contained in a string.
-    Parameters: string contains the XML code
-    Returns: the parsed XMLElement containing the whole XML tree
-    Throws: ParseException if there's an error in the XML code
+    /**
+     * Parses into an XMLElement the XML code contained in a string.
+     *
+     * @param string contains the XML code
+     * @return the parsed XMLElement containing the whole XML tree
+     * @throws ParseException if there's an error in the XML code
      */
     public static XMLElement buildFromString(String string) throws ParseException {
         try{
@@ -28,12 +29,13 @@ public class XMLTreeBuilder {
         }
     }
 
-    /*
-    Parses into an XMLElement the XML code contained in a file.
-    Parameters: path contains the path of the file
-    Returns: the parsed XMLElement containing the whole XML tree
-    Throws: ParseException if there's an error in the XML code
-            FileNotFoundException if the file in the specified path does not exist
+    /**
+     * Parses into an XMLElement the XML code contained in a file.
+     *
+     * @param path contains the path of the file
+     * @return the parsed XMLElement containing the whole XML tree
+     * @throws ParseException if there's an error in the XML code
+     * @throws FileNotFoundException if the file in the specified path does not exist
      */
     public static XMLElement buildFromFile(String path) throws FileNotFoundException, ParseException {
         File file = new File(path);
@@ -41,12 +43,13 @@ public class XMLTreeBuilder {
     }
 
 
-    /*
-    Parses into an XMLElement the XML code contained in a file.
-    Parameters: file is the file
-    Returns: the parsed XMLElement containing the whole XML tree
-    Throws: ParseException if there's an error in the XML code
-            FileNotFoundException if the file does not exist
+    /**
+     * Parses into an XMLElement the XML code contained in a file.
+     *
+     * @param file is the file
+     * @return the parsed XMLElement containing the whole XML tree
+     * @throws ParseException if there's an error in the XML code
+     * @throws FileNotFoundException if the file does not exist
      */
     public static XMLElement buildFromFile(File file) throws FileNotFoundException, ParseException {
         try{
@@ -60,12 +63,13 @@ public class XMLTreeBuilder {
 
 
 
-    /*
-    Parses into an XMLElement the XML code read from an InputStream.
-    Parameters: stream is the InputStream
-    Returns: the parsed XMLElement containing the whole XML tree
-    Throws: ParseException if there's an error in the XML code
-            IOException if there's an error while reading from the InputStream
+    /**
+     * Parses into an XMLElement the XML code read from an InputStream.
+     *
+     * @param stream is the InputStream
+     * @return the parsed XMLElement containing the whole XML tree
+     * @throws ParseException if there's an error in the XML code
+     * @throws IOException if there's an error while reading from the InputStream
      */
     public static XMLElement buildFromStream(InputStream stream) throws ParseException, IOException {
         Document document;

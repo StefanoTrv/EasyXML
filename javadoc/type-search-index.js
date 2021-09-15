@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"it.trvi.easyxml","l":"XMLElement"},{"p":"it.trvi.easyxml","l":"XMLTreeBuilder"}];updateSearchResults();
