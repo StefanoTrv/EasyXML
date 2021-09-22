@@ -53,7 +53,7 @@ The parser in this library is based on the Java DOM parser.
 
 All the classes in this library are contained in the package "`it.trvi.easyxml`".
 
-## Setup
+# Setup
 You can download the jar file containing the most recent recent version of this library from the [releases page on Github](https://github.com/StefanoTrv/EasyXML/releases).
 
 # Documentation
