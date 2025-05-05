@@ -4,6 +4,7 @@ A Java library to easily parse, unparse and manipulate XML.
 # Index
 * [Release notes](#release-notes)
 * [Introduction](#introduction)
+* [Setup](#setup)
 * [Documentation](#documentation)
   * [XMLElement](#xmlelement)
     * [XMLElement(String tagName)](#xmlelementstring-tagname)
@@ -51,6 +52,9 @@ The scope of this library is to provide an instrument to easily parse, unparse a
 The parser in this library is based on the Java DOM parser.
 
 All the classes in this library are contained in the package "`it.trvi.easyxml`".
+
+# Setup
+You can download the jar file containing the most recent recent version of this library from the [releases page on Github](https://github.com/StefanoTrv/EasyXML/releases).
 
 # Documentation
 This library is composed by two classes: `XMLElement` represents a single XML element and provides methods to access and modify its data and its children; `XMLTreeBuilder` provides various functions to parse XML code into an XMLElement.  
