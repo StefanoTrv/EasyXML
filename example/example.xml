@@ -1,0 +1,22 @@
+<email>
+	<to>
+		<name>
+			Tom Bombadil
+		</name>
+		<address>
+			tomb@mail.me
+		</address>
+	</to>
+	<from>
+		<name>
+			Henry Walton Jones
+		</name>
+		<address>
+			henryjones@history.uchicago.edu
+		</address>
+	</from>
+	<body>
+		Hi,
+		you good?
+	</body>
+</email>

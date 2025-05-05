@@ -343,7 +343,7 @@ public class EasyXMLExample{
         We know that it's the second address in the document, and we exploit this fact.
         */
         ArrayList<XMLElement> addresses2 = root.getDescendantsWithTag("address");
-        addresses2.get(1).setTextContent("tombombadil@mail.me");
+        addresses2.get(0).setTextContent("tombombadil@mail.me");
         
         
 
@@ -392,7 +392,7 @@ After executing the previous code, this will be the content of "out.xml":
 			Tom Bombadil
 		</name>
 		<address>
-			tomb@mail.me
+			tombombadil@mail.me
 		</address>
 	</to>
 	<from>
@@ -400,7 +400,7 @@ After executing the previous code, this will be the content of "out.xml":
 			Henry Walton Jones
 		</name>
 		<address>
-			tombombadil@mail.me
+			henryjones@history.uchicago.edu
 		</address>
 	</from>
 	<subject>
